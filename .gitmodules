@@ -1,0 +1,3 @@
+[submodule "arduino/vendor/WifiManager"]
+	path = arduino/vendor/WifiManager
+	url = https://github.com/tzapu/WiFiManager.git

@@ -1,6 +1,9 @@
+#include "Arduino.h"
+
 #include "duid.h"
 
-bool readDuid( DUID &duid){  
+bool readDuid( DUID &duid)
+{  
   if( EEPROM.read(0) != 'D' ){ return false; }
   if( EEPROM.read(1) != 'U' ){ return false; }
   if( EEPROM.read(2) != 'I' ){ return false; }
@@ -11,4 +14,16 @@ bool readDuid( DUID &duid){
   }
   
   return true;
+}
+
+void burnRandomDuid()
+{
+  EEPROM.write(0, 'D');
+  EEPROM.write(1, 'U');
+  EEPROM.write(2, 'I');
+  EEPROM.write(3, 'D');
+
+  for ( int i = 0; i <= 16; i++ ){
+    EEPROM.write(i+4, random(256)); 
+  }
 }
