@@ -1,7 +1,10 @@
 require('./config');
 
 const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
+app.use(bodyParser.text({type:'*/*'}));
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -11,8 +14,8 @@ app.get('/', function (req, res) {
   `);
 });
 
-app.get('/device/heartbeat', function (req, res) {
-  const deviceUid = req.body.toString();
+app.post('/device/heartbeat', function (req, res) {
+  const deviceUid = req.body;
   console.log('received a heartbeat from:', deviceUid);
   res.send('OK');
 });
