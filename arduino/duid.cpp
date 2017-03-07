@@ -27,3 +27,13 @@ void burnRandomDuid()
     EEPROM.write(i+4, random(256)); 
   }
 }
+
+String duidAsString(const DUID &duid)
+{
+  String s;
+  for ( int i = 0; i <= 16; i++ ){
+    s += String(duid[i],HEX);
+  }
+  return s;
+}
+
