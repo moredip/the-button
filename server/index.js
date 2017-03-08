@@ -22,7 +22,8 @@ app.post('/device/heartbeat', function (req, res) {
 
 app.post('/device/button', function (req, res) {
   const deviceUid = req.body;
-  res.send('button was pressed on device ', deviceUid);
+  console.log('received a button press from:', deviceUid);
+  res.send('OK');
 });
 
 app.listen(app.get('port'), function() {
