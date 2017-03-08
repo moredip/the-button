@@ -20,6 +20,11 @@ app.post('/device/heartbeat', function (req, res) {
   res.send('OK');
 });
 
+app.post('/device/button', function (req, res) {
+  const deviceUid = req.body;
+  res.send('button was pressed on device ', deviceUid);
+});
+
 app.listen(app.get('port'), function() {
   console.log('server running on port', app.get('port'));
 });
