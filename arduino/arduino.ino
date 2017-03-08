@@ -4,39 +4,20 @@
 #include <ESP8266WebServer.h>     //Local WebServer used to serve the configuration portal
 #include "vendor/WiFiManager/WifiManager.h"
 
-#include "duid.h"
-#include "heartbeat.h"
+#include "main.h"
 
-DUID g_duid;
-Heartbeat *pHeartbeat;
+Main main;
 
 void setup() {
   Serial.begin(115200);
   delay(100); // seems to need a brief pause at boot
+
+  main.setup();
   
-  loadDuid();
-
-  pHeartbeat = new Heartbeat(duidAsString(g_duid));
-
   WiFiManager wifiManager;
   wifiManager.autoConnect("the button");
 }
 
 void loop() {
-  long now = millis();
-  pHeartbeat->takeTurn(now);
+  main.loop();
 }
-
-void loadDuid(){
-  EEPROM.begin(20);
-
-  if( readDuid(g_duid) ){
-    Serial.print("Device UID: ");
-    Serial.println(duidAsString(g_duid));
-  }else{
-    Serial.println("<WARNING> No Device UID found in EEPROM");
-  }
-
-  EEPROM.end();
-}
-

@@ -1,16 +1,14 @@
-#include <ESP8266HTTPClient.h>
+#include "ServerGateway.h"
 
 #pragma once
 
 class Heartbeat {
   public:
-    Heartbeat(const String &deviceUid);
+    Heartbeat(ServerGateway &serverGateway);
     void takeTurn(long now);
 
   private:
-    void sendHeartbeat();
     
-    HTTPClient _httpClient;
-    String _deviceUid;
+    ServerGateway &_serverGateway;
     long _lastHeartbeat;
 };
