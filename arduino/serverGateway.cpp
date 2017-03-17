@@ -1,7 +1,15 @@
 #include "serverGateway.h"
 
+/*
 #define SERVER_HOST ("192.168.0.102")
 #define SERVER_PORT (5000)
+//*/
+
+//*
+#define SERVER_HOST ("an-button.herokuapp.com")
+#define SERVER_PORT (80)
+//*/
+
 
 ServerGateway::ServerGateway(const String &deviceUid)
   : _deviceUid(deviceUid)
