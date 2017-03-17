@@ -4,6 +4,7 @@ class ServerGateway;
 class Heartbeat;
 class Button;
 class ButtonReporter;
+class LED;
 
 class Main {
   public:
@@ -17,4 +18,5 @@ class Main {
     Heartbeat *_pHeartbeat;
     Button *_pButton;
     ButtonReporter *_pButtonReporter;
+    LED *_pLED;
 };

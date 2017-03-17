@@ -7,6 +7,7 @@
 #include "heartbeat.h"
 #include "button.h"
 #include "buttonReporter.h"
+#include "led.h"
 
 String loadDuid();
 
@@ -21,12 +22,14 @@ void Main::setup(){
   _pHeartbeat = new Heartbeat(*_pServerGateway);
   _pButtonReporter = new ButtonReporter(*_pServerGateway);
   _pButton = new Button(*_pButtonReporter);
+  _pLED = new LED();
 }
 
 void Main::loop() {
   long now = millis();
   _pHeartbeat->takeTurn(now);
   _pButton->takeTurn(now);
+  _pLED->takeTurn(now);
 }
 
 String loadDuid(){
