@@ -1,4 +1,5 @@
 #include "Arduino.h"
+#include <Ticker.h>
 #include <limits.h>
 
 #include "led.h"
@@ -15,17 +16,8 @@ enum STATE {
 
 StateMachine::StateMachine(LED &led)
   : _led(led),
-  _state(BOOTING),
-  _futureIdleTransitionPoint(LONG_MAX)
+  _state(BOOTING)
 {
-}
-
-void StateMachine::takeTurn(long now){
-  if( now > _futureIdleTransitionPoint ){
-    _state = IDLE;
-    _futureIdleTransitionPoint = LONG_MAX;
-    onStateChanged();
-  }
 }
 
 void StateMachine::onHeartbeat(){
@@ -61,6 +53,17 @@ void StateMachine::onStateChanged(){
   }
 }
 
+Ticker ticker;
+
+void transitionToIdleBinder(StateMachine *self){
+  reinterpret_cast<StateMachine *>(self)->_transitionToIdle();
+}
+
 void StateMachine::requestFutureTransitionToIdle(long duration){
-  _futureIdleTransitionPoint = millis() + duration;
+  ticker.once(duration,transitionToIdleBinder,this);
+}
+
+void StateMachine::_transitionToIdle(){
+  _state = IDLE;
+  onStateChanged();
 }

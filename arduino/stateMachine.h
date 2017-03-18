@@ -11,11 +11,12 @@ class StateMachine {
     void onHeartbeat();
     void onButtonPressed();
 
+    void _transitionToIdle();
+
   private:
     void onStateChanged();
     void requestFutureTransitionToIdle(long duration);
 
     LED &_led;
     int _state;
-    long _futureIdleTransitionPoint;
 };

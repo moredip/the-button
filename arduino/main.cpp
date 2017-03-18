@@ -33,7 +33,6 @@ void Main::loop() {
   _pHeartbeat->takeTurn(now);
   _pButton->takeTurn(now);
   _pLED->takeTurn(now);
-  _pStateMachine->takeTurn(now);
 }
 
 String loadDuid(){
