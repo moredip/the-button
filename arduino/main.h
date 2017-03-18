@@ -5,6 +5,7 @@ class Heartbeat;
 class Button;
 class ButtonReporter;
 class LED;
+class StateMachine;
 
 class Main {
   public:
@@ -14,6 +15,7 @@ class Main {
 
   private:
     String _duid;
+    StateMachine *_pStateMachine;
     ServerGateway *_pServerGateway;
     Heartbeat *_pHeartbeat;
     Button *_pButton;

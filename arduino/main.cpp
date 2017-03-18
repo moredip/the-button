@@ -3,6 +3,7 @@
 #include "main.h"
 
 #include "duid.h"
+#include "stateMachine.h"
 #include "serverGateway.h"
 #include "heartbeat.h"
 #include "button.h"
@@ -18,11 +19,13 @@ void Main::setup(){
   _duid = loadDuid();
   
   // not bothering to clean these up since we'll be a singleton
+  _pLED = new LED();
+  _pStateMachine = new StateMachine(*_pLED);
+
   _pServerGateway = new ServerGateway(_duid);
   _pHeartbeat = new Heartbeat(*_pServerGateway);
-  _pButtonReporter = new ButtonReporter(*_pServerGateway);
+  _pButtonReporter = new ButtonReporter(*_pServerGateway,*_pStateMachine);
   _pButton = new Button(*_pButtonReporter);
-  _pLED = new LED();
 }
 
 void Main::loop() {
@@ -30,6 +33,7 @@ void Main::loop() {
   _pHeartbeat->takeTurn(now);
   _pButton->takeTurn(now);
   _pLED->takeTurn(now);
+  _pStateMachine->takeTurn(now);
 }
 
 String loadDuid(){
