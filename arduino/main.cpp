@@ -3,6 +3,7 @@
 #include "main.h"
 
 #include "duid.h"
+#include "networkConnector.h"
 #include "stateMachine.h"
 #include "serverGateway.h"
 #include "heartbeat.h"
@@ -23,9 +24,13 @@ void Main::setup(){
   _pStateMachine = new StateMachine(*_pLED);
 
   _pServerGateway = new ServerGateway(_duid);
-  _pHeartbeat = new Heartbeat(*_pServerGateway);
+  _pHeartbeat = new Heartbeat(*_pServerGateway, *_pStateMachine);
   _pButtonReporter = new ButtonReporter(*_pServerGateway,*_pStateMachine);
   _pButton = new Button(*_pButtonReporter);
+
+
+  NetworkConnector networkConnector(*_pStateMachine);
+  networkConnector.BLOCKING_connectToNetwork();
 }
 
 void Main::loop() {

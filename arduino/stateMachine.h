@@ -8,6 +8,9 @@ class StateMachine {
 
     void takeTurn(long now);
 
+    void onConnectingToNetwork();
+    void onConnectedToNetwork();
+    void onFailedToConnectToNetwork();
     void onHeartbeat();
     void onButtonPressed();
 
