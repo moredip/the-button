@@ -35,5 +35,5 @@ void LED::takeTurn(long now){
 //  Serial.println("cyclePosition:"+String(cyclePosition));
 //  Serial.println("ledOn:"+String(ledOn));
 
-  digitalWrite(LED_PIN,ledOn);
+  digitalWrite(LED_PIN,!ledOn);
 }
