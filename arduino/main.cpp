@@ -10,6 +10,7 @@
 #include "button.h"
 #include "buttonReporter.h"
 #include "led.h"
+#include "neoPixel.h"
 
 String loadDuid();
 
@@ -21,7 +22,8 @@ void Main::setup(){
   
   // not bothering to clean these up since we'll be a singleton
   _pLED = new LED();
-  _pStateMachine = new StateMachine(*_pLED);
+  _pNeoPixel = new NeoPixel();
+  _pStateMachine = new StateMachine(*_pLED,*_pNeoPixel);
 
   _pServerGateway = new ServerGateway(_duid);
   _pHeartbeat = new Heartbeat(*_pServerGateway, *_pStateMachine);

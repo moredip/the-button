@@ -3,6 +3,7 @@
 #include <limits.h>
 
 #include "led.h"
+#include "neoPixel.h"
 #include "stateMachine.h"
 
 enum STATE {
@@ -14,8 +15,9 @@ enum STATE {
   SENDING_BUTTON_PRESS
 };
 
-StateMachine::StateMachine(LED &led)
+StateMachine::StateMachine(LED &led, NeoPixel &neoPixel)
   : _led(led),
+  _neoPixel(neoPixel),
   _state(BOOTING)
 {
   onStateChanged();
@@ -53,18 +55,22 @@ void StateMachine::onStateChanged(){
     case BOOTING:
       Serial.println("<StateMachine> BOOTING");
       _led.setOn();
+      _neoPixel.setColor(0,0,255);
       return;
     case LOOKING_FOR_NETWORK: 
       Serial.println("<StateMachine> LOOKING_FOR_NETWORK");
       _led.setFlashing(500,1000);
+      _neoPixel.setColor(0,255,255);
       return;
     case NO_NETWORK: 
       Serial.println("<StateMachine> NO_NETWORK");
       _led.setFlashing(50,50);
+      _neoPixel.setColor(255,0,0);
       return;
     case IDLE: 
       Serial.println("<StateMachine> IDLE");
       _led.setOff();
+      _neoPixel.setColor(0,0,0);
       return;
     case SENDING_HEARTBEAT:
       Serial.println("<StateMachine> SENDING_HEARTBEAT");

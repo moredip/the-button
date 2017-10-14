@@ -1,10 +1,11 @@
 #pragma once
 
 class LED;
+class NeoPixel;
 
 class StateMachine {
   public:
-    StateMachine(LED &led);
+    StateMachine(LED &led,NeoPixel &neoPixel);
 
     void takeTurn(long now);
 
@@ -21,5 +22,6 @@ class StateMachine {
     void requestFutureTransitionToIdle(long duration);
 
     LED &_led;
+    NeoPixel &_neoPixel;
     int _state;
 };
