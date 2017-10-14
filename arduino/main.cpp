@@ -23,6 +23,7 @@ void Main::setup(){
   // not bothering to clean these up since we'll be a singleton
   _pLED = new LED();
   _pNeoPixel = new NeoPixel();
+  //_pNeoPixel = 0;
   _pStateMachine = new StateMachine(*_pLED,*_pNeoPixel);
 
   _pServerGateway = new ServerGateway(_duid);

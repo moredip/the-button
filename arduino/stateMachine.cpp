@@ -74,10 +74,12 @@ void StateMachine::onStateChanged(){
       return;
     case SENDING_HEARTBEAT:
       Serial.println("<StateMachine> SENDING_HEARTBEAT");
+      _neoPixel.setColor(10,0,10);
       _led.setFlashing(5,20);
       return;
     case SENDING_BUTTON_PRESS: 
       Serial.println("<StateMachine> SENDING_BUTTON_PRESS");
+      _neoPixel.setColor(255,255,0);
       _led.setFlashing(500,100);
       return;
   }
