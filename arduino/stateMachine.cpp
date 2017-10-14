@@ -47,7 +47,7 @@ void StateMachine::onHeartbeat(){
 void StateMachine::onButtonPressed(){
   _state = SENDING_BUTTON_PRESS;
   onStateChanged();
-  requestFutureTransitionToIdle(3000);
+  requestFutureTransitionToIdle(5000);
 }
 
 void StateMachine::onStateChanged(){
@@ -74,7 +74,7 @@ void StateMachine::onStateChanged(){
       return;
     case SENDING_HEARTBEAT:
       Serial.println("<StateMachine> SENDING_HEARTBEAT");
-      _neoPixel.setColor(10,0,10);
+      _neoPixel.setColor(5,0,8);
       _led.setFlashing(5,20);
       return;
     case SENDING_BUTTON_PRESS: 
