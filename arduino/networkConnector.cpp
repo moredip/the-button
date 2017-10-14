@@ -1,9 +1,6 @@
-#include "networkConnector.h"
+#include <WiFiManager.h> // https://github.com/tzapu/WiFiManager#install-through-library-manager
 
-#include <ESP8266WiFi.h>
-#include <DNSServer.h>
-#include <ESP8266WebServer.h>
-#include "vendor/WiFiManager/WifiManager.h"
+#include "networkConnector.h"
 
 #include "stateMachine.h"
 
