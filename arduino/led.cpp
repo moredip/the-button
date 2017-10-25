@@ -11,6 +11,11 @@ LED::LED()
 }
 
 void LED::setFlashing(int periodOn, int periodOff){
+  Serial.print("<LED> setFlashing(");
+  Serial.print(periodOn);
+  Serial.print(",");
+  Serial.print(periodOff);
+  Serial.println(")");
   _dutyCyclePeriodOn = periodOn;
   _dutyCyclePeriodOff = periodOff;
 }

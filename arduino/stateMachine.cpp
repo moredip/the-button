@@ -41,7 +41,7 @@ void StateMachine::onFailedToConnectToNetwork(){
 void StateMachine::onHeartbeat(){
   _state = SENDING_HEARTBEAT;
   onStateChanged();
-  requestFutureTransitionToIdle(100);
+  requestFutureTransitionToIdle(500);
 }
 
 void StateMachine::onButtonPressed(){

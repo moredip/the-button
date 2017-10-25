@@ -17,12 +17,12 @@ ServerGateway::ServerGateway(const String &deviceUid)
 
 void ServerGateway::sendHeartbeat(){
   Serial.print("[ServerGateway] sending heartbeat for "); Serial.println(_deviceUid);
-  postDeviceUIdTo("/device/heartbeat");
+  postDeviceUIdTo("/dapi/heartbeat");
 }
 
 void ServerGateway::sendButtonPress(){
   Serial.println("[ServerGateway] sending button press");
-  postDeviceUIdTo("/device/button");
+  postDeviceUIdTo("/dapi/button");
 }
 
 bool ServerGateway::postDeviceUIdTo(const String &endpoint){

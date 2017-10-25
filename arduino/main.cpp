@@ -23,7 +23,6 @@ void Main::setup(){
   // not bothering to clean these up since we'll be a singleton
   _pLED = new LED();
   _pNeoPixel = new NeoPixel();
-  //_pNeoPixel = 0;
   _pStateMachine = new StateMachine(*_pLED,*_pNeoPixel);
 
   _pServerGateway = new ServerGateway(_duid);
@@ -54,6 +53,12 @@ String loadDuid(){
     return duidAsString(duid);
   }else{
     Serial.println("<WARNING> No Device UID found in EEPROM");
+
+    //Serial.println("No Device UID found in EEPROM. Burning a new Device UID...");
+    //EEPROM.begin(20);
+    //burnRandomDuid();
+    //EEPROM.end();
+
     return "UNIDENTIFIED DEVICE";
   }
 }
